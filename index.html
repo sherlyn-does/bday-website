@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday!</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+</head>
+<body>
+  <div id="game">
+    <p id="instructions">Click the characters to collect ingredients!</p>
+
+    <div id="characters">
+      <img src="cow.png" id="cow" class="clickable" />
+      <img src="chicken.png" id="chicken" class="clickable" />
+      <img src="farmer.png" id="farmer" class="clickable" />
+    </div>
+
+    <div id="inventory">
+      <p>Inventory:</p>
+      <div id="item-images"></div>
+    </div>
+
+    <div id="craftMsg" style="display: none;">
+      <p>🎉 Recipe Unlocked!</p>
+      <div style="margin-bottom: 10px;"><img src="cake.png" alt="Minecraft Cake" class="cake-image floating" /></div>
+      <div style="margin-bottom: 10px; text-align: center;"></div>
+      <div style="margin-bottom: 10px;"><button id="finalCraftBtn">Craft Cake 🎂</button></div>
+    </div>
+
+    <!-- Crafting Grid Area -->
+    <div id="craftingArea" style="display: none;">
+      <p>Arrange the ingredients!</p>
+      <div class="grid">
+        <div class="slot" data-pos="0"></div>
+        <div class="slot" data-pos="1"></div>
+        <div class="slot" data-pos="2"></div>
+        <div class="slot" data-pos="3"></div>
+        <div class="slot" data-pos="4"></div>
+        <div class="slot" data-pos="5"></div>
+        <div class="slot" data-pos="6"></div>
+        <div class="slot" data-pos="7"></div>
+        <div class="slot" data-pos="8"></div>
+      </div>
+      <div class="items-to-drag">
+        <img src="milk.png" class="draggable" draggable="true" id="drag-milk" />
+        <img src="egg.png" class="draggable" draggable="true" id="drag-egg" />
+        <img src="wheat.png" class="draggable" draggable="true" id="drag-wheat" />
+      </div>
+      <div id="craft-result"></div>
+    </div>
+  </div>
+
+  <!-- Sound files -->
+  <audio id="cowSound" src="cow.mp3"></audio>
+  <audio id="chickenSound" src="chicken.mp3"></audio>
+  <audio id="farmerSound" src="farmer_angry.mp3"></audio>
+  <audio id="craftSound" src="craft.mp3"></audio>
+<div id="crafting-container"></div>
+  <script src="script.js"></script>
+
+</body>
+</html>

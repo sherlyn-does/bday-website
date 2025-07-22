@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Celebration</title>
+<link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<canvas id="fireworksCanvas"></canvas>
+<canvas id="particleCanvas"></canvas>
+
+<style>
+  body {
+    font-family: 'Minecraftia', sans-serif;
+    background-image: url('villagers.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+.firework {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color);
+  border-radius: 50%;
+  animation: explode 1s ease-out forwards;
+  pointer-events: none;
+  opacity: 1;
+}
+#fireworksCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+
+
+@keyframes explode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.5);
+    opacity: 0;
+  }
+}
+#particleCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+</style>
+
+  <h1>🎉 Happy Birthday Joshua! 🎂</h1>
+  <p>Enjoy the celebration!</p>
+
+  <!-- 🔽 Button + Audio Here -->
+  <button id="startBtn">Start Celebration 🎉</button>
+
+  <audio id="celebrationAudio" loop>
+    <source src="celebration.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const btn = document.getElementById("startBtn");
+    const audio = document.getElementById("celebrationAudio");
+
+    btn.addEventListener("click", () => {
+      audio.play();
+      btn.style.display = "none";
+    });
+  </script>
+<script>
+function createFirework(x, y) {
+  const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+  for (let i = 0; i < 20; i++) {
+    const firework = document.createElement('div');
+    firework.className = 'firework';
+    firework.style.left = ${x}px;
+    firework.style.top = ${y}px;
+    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+    
+    const dx = (Math.random() - 0.5) * 200 + 'px';
+    const dy = (Math.random() - 0.5) * 200 + 'px';
+    firework.style.setProperty('--dx', dx);
+    firework.style.setProperty('--dy', dy);
+
+    document.body.appendChild(firework);
+
+    // Remove after animation
+    setTimeout(() => {
+      firework.remove();
+    }, 1000);
+  }
+}
+
+// Auto-fireworks every second
+setInterval(() => {
+  const x = Math.random() * window.innerWidth;
+  const y = Math.random() * window.innerHeight / 2;
+  createFirework(x, y);
+}, 700);
+</script>
+<script>
+function launchFirework(x, y) {
+  const colors = ['red', 'orange', 'yellow', 'lime', 'cyan', 'blue', 'magenta', 'white'];
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement("div");
+    particle.className = "firework";
+
+    // Random angle and distance
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 100 + 50;
+
+    const dx = Math.cos(angle) * distance + "px";
+    const dy = Math.sin(angle) * distance + "px";
+
+    // Set color and movement
+    particle.style.setProperty('--dx', dx);
+    particle.style.setProperty('--dy', dy);
+    particle.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
+    particle.style.left = x + "px";
+    particle.style.top = y + "px";
+
+    document.body.appendChild(particle);
+
+    // Remove after animation
+    setTimeout(() => particle.remove(), 1000);
+  }
+}
+
+// Loop fireworks every second at random positions
+setInterval(() => {
+  const x = Math.random() * window.innerWidth;
+  const y = Math.random() * window.innerHeight / 2; // upper half only
+  launchFirework(x, y);
+}, 1000);
+</script>
+<script>
+const canvas = document.getElementById("fireworksCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+let particles = [];
+
+function createFirework(x, y) {
+  const colors = ["#ff3838", "#ffb302", "#34e7e4", "#17c0eb", "#0be881", "#706fd3"];
+  for (let i = 0; i < 50; i++) {
+    const angle = (Math.PI * 2 * i) / 50;
+    const speed = Math.random() * 5 + 2;
+    particles.push({
+      x,
+      y,
+      dx: Math.cos(angle) * speed,
+      dy: Math.sin(angle) * speed,
+      alpha: 1,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      size: Math.random() * 2 + 1
+    });
+  }
+}
+
+function updateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach((p, i) => {
+    p.x += p.dx;
+    p.y += p.dy;
+    p.dy += 0.05; // gravity
+    p.alpha -= 0.01;
+
+    if (p.alpha <= 0) {
+      particles.splice(i, 1);
+    } else {
+      ctx.globalAlpha = p.alpha;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  });
+
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(updateParticles);
+}
+
+setInterval(() => {
+  const x = Math.random() * canvas.width;
+  const y = Math.random() * canvas.height / 2;
+  createFirework(x, y);
+}, 800);
+
+updateParticles();
+</script>
+
+<script>
+const canvas = document.getElementById("particleCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+let particles = [];
+
+document.addEventListener("mousemove", (e) => {
+  for (let i = 0; i < 5; i++) {
+    particles.push({
+      x: e.clientX,
+      y: e.clientY,
+      size: Math.random() * 4 + 2,
+      speedX: Math.random() * 2 - 1,
+      speedY: Math.random() * 2 - 1,
+      color: getRandomColor(),
+      alpha: 1
+    });
+  }
+});
+
+function getRandomColor() {
+  const colors = ["#ff5555", "#55ff55", "#5555ff", "#ffaa00", "#ff55ff"];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach((p, i) => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+    p.alpha -= 0.02;
+    if (p.alpha <= 0) particles.splice(i, 1);
+
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = p.alpha;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+</script>
+
+</body>
+</html>

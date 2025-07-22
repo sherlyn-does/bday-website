@@ -1,0 +1,176 @@
+body {
+  font-family: 'Minecraftia', sans-serif;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+
+#characters img {
+  width: 100px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#inventory {
+  margin-top: 20px;
+}
+
+.item-icon {
+  width: 50px;
+  margin: 5px;
+}
+
+.cake-image {
+  width: 100px;
+}
+
+.floating {
+  animation: float 1.5s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.slot {
+  width: 80px;
+  height: 80px;
+  border: 2px solid white;
+  background-color: #555;
+}
+
+.items-to-drag {
+  margin-top: 20px;
+}
+
+.draggable {
+  width: 50px;
+  margin: 10px;
+  cursor: grab;
+}
+#game {
+  transform: scale(2); /* You can change 1.5 to 2 or 1.8 as needed */
+  transform-origin: top center;
+  display: inline-block;
+  margin-top: 40px;
+}
+body {
+  text-align: center;
+  background: #000; /* fallback color */
+  font-family: 'Minecraftia', sans-serif;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+#instructions {
+  color: black;
+}
+#celebrateBtn {
+  font-size: 20px;
+  padding: 10px 20px;
+  background-color: gold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.crafted-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  margin-top: 20px;
+}
+
+.crafted-cake {
+  width: 100px;
+  margin: 10px;
+}
+
+.celebrate-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: gold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.celebrate-button:hover {
+  background-color: orange;
+}
+.celebrate-btn {
+  margin-top: 20px;
+  padding: 10px 24px;
+  font-size: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.celebrate-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 20px;
+  background-color: #ffd700;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Minecraftia', sans-serif;
+  cursor: pointer;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.cake-image {
+  display: block;
+  margin: 10px auto;
+  width: 150px;
+}
+
+.villager-group {
+  width: 300px;
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.birthday-message {
+  font-size: 28px;
+  color: black;
+  margin-top: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.center-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+
